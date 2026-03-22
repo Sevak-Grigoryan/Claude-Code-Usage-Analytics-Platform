@@ -166,7 +166,22 @@ JSONL (521 MB) → Stream parse → Validate → Batch INSERT → SQLite
 
 ## LLM Usage Log
 
-Built using **Claude Code (Claude Opus 4.6)**.
+Built using **Claude Code (Claude Opus 4.6)** as the primary development assistant throughout the project.
+
+### Development Phases & Prompts
+
+| Phase | Prompt Summary | What Was Generated |
+|-------|---------------|-------------------|
+| **1. Project Setup** | "Build an end-to-end analytics platform with professional structure for Claude Code telemetry" | Project scaffold, `config.py`, directory layout, `requirements.txt` |
+| **2. Data Ingestion** | "Create a streaming parser for 500MB+ JSONL telemetry, with validation and batch loading into SQLite" | `parser.py` (stream-based JSONL reader), `validator.py` (field checks, type coercion, stats), `loader.py` (batch INSERT with 5K chunk size) |
+| **3. Database Layer** | "Design normalized SQLite schema with indexes for the analytics queries we'll need" | `schema.py` (6 tables, 15 indexes), `connection.py` (WAL mode, row factory), `queries.py` (reusable query helpers) |
+| **4. Analytics Engine** | "Write SQL+pandas analytics: token/cost breakdowns, session patterns, tool usage stats" | `token_usage.py`, `session_patterns.py`, `tool_usage.py` — each with multiple aggregation functions |
+| **5. ML Features** | "Add linear regression forecasting for cost/tokens and Isolation Forest anomaly detection" | `forecasting.py` (scikit-learn LinearRegression + IsolationForest), `advanced_stats.py` (correlations, cohort analysis, efficiency scores) |
+| **6. Real-Time Simulation** | "Simulate live telemetry streaming with rolling window metrics" | `realtime.py` (TelemetryStream class with configurable speed/window) |
+| **7. Dashboard** | "Build a 7-page Streamlit dashboard with Plotly charts and KPI cards" | `app.py`, 7 view modules, reusable `charts.py` and `metrics.py` components |
+| **8. REST API** | "Create FastAPI endpoints exposing all analytics with OpenAPI docs" | `endpoints.py` (18 GET routes) |
+| **9. Tests** | "Write unit tests for ingestion, database, and analytics modules" | 3 test files, 27 test cases |
+| **10. Bug Fixes** | "Fix Streamlit sidebar showing empty pages" / "Fix use_container_width deprecation" | Renamed `pages/` → `views/`, replaced deprecated Streamlit API calls |
 
 ### Key prompts
 1. **Architecture**: "Build an end-to-end analytics platform with professional structure for Claude Code telemetry"
