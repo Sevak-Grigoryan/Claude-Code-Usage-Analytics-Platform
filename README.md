@@ -41,7 +41,7 @@ End-to-end analytics platform that processes telemetry data from Claude Code ses
 │
 ├── dashboard/                     # Streamlit dashboard
 │   ├── app.py                     # Entry point
-│   ├── pages/
+│   ├── views/
 │   │   ├── overview.py            # KPIs & daily trends
 │   │   ├── token_analysis.py      # Cost by model/practice/level
 │   │   ├── tool_analysis.py       # Tool frequency, errors
